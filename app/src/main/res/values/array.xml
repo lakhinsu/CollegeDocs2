@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_year">
+        <item>@string/year_fy</item>
+        <item>@string/year_sy</item>
+        <item>@string/year_ty</item>
+        <item>@string/year_fly</item>
+    </string-array>
+
+    <string-array name="array_1year_sem">
+        <item>SEM I</item>
+        <item>SEM II</item>
+    </string-array>
+
+    <string-array name="array_2year_sem">
+        <item>SEM III</item>
+        <item>SEM IV</item>
+    </string-array>
+
+    <string-array name="array_3year_sem">
+        <item>SEM V</item>
+        <item>SEM VI</item>
+    </string-array>
+
+    <string-array name="array_4year_sem">
+        <item>SEM VII</item>
+        <item>SEM VIII</item>
+    </string-array>
+
+    <string-array name="sem1_subject">
+        <item>CS</item>
+        <item>CPU</item>
+        <item>EEE</item>
+        <item>ME</item>
+        <item>EME</item>
+        <item>Calculus</item>
+
+    </string-array>
+
+    <string-array name="sem2_subject">
+        <item>Physics</item>
+        <item>EG</item>
+        <item>Maths2</item>
+        <item>BE</item>
+        <item>EEW</item>
+        <item>CPD</item>
+
+    </string-array>
+
+    <string-array name="sem3_subject">
+        <item>AEM</item>
+        <item>DBMS</item>
+        <item>DS</item>
+        <item>DE</item>
+        <item>EEM</item>
+    </string-array>
+
+    <string-array name="sem4_subject">
+        <item>OS</item>
+        <item>CO</item>
+        <item>CN</item>
+        <item>OOPC</item>
+        <item>NMS</item>
+    </string-array>
+    <string-array name="sem5_subject">
+        <item>ADA</item>
+        <item>SP</item>
+        <item>CG</item>
+        <item>OOPJ</item>
+    </string-array>
+
+    <string-array name="sem6_subject">
+        <item>DE2B</item>
+        <item>SE</item>
+        <item>AdJava</item>
+        <item>WebTech</item>
+        <item>DotNet</item>
+        <item>DOS</item>
+        <item>DataComp</item>
+    </string-array>
+
+    <string-array name="sem7_subject">
+        <item>Project1</item>
+        <item>INS</item>
+        <item>WirelessComm</item>
+        <item>SOC</item>
+        <item>DDMS</item>
+        <item>DM</item>
+        <item>DigData</item>
+    </string-array>
+
+    <string-array name="sem8_subject">
+        <item>Project2</item>
+        <item>AI</item>
+        <item>Python</item>
+        <item>CIS</item>
+        <item>Android</item>
+        <item>IOT</item>
+        <item>WebData</item>
+        <item>Animation</item>
+    </string-array>
+
+</resources>

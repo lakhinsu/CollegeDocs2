@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    tools:context=".Upload">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Select Year"/>
+    <Spinner
+        android:layout_width="wrap_content"
+        android:text="Select Year"
+        android:entries="@array/array_year"
+        android:id="@+id/upload_xml_selectyear"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Select SEM"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:text="Select SEM"
+        android:id="@+id/upload_xml_selectsem"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Select Subject"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:text="Select Subject"
+        android:id="@+id/upload_xml_selectsubject"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select File"
+        android:background="@drawable/btn_bg_selector"
+        android:id="@+id/upload_xml_selectfile"/>
+    <EditText
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/upload_xml_filename"
+        android:hint="Enter the document name\n(eg.Assignment1)"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/upload_xml_check"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:text="Upload"
+
+        android:background="@drawable/btn_bg_selector"
+        android:id="@+id/upload_xml_upload"/>
+
+</LinearLayout>

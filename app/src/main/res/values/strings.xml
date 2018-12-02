@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">College Docs</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="year_fy">1st Year</string>
+    <string name="year_sy">2nd Year</string>
+    <string name="year_ty">3rd Year</string>
+    <string name="year_fly">4th Year</string>
+    <string name="title_activity_fourth_year">fourth_year</string>
+
+
+</resources>

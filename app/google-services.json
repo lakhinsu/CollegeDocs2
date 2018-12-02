@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "874657500404",
+    "firebase_url": "https://collegedocs2.firebaseio.com",
+    "project_id": "collegedocs2",
+    "storage_bucket": "collegedocs2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874657500404:android:74c218ff789aa749",
+        "android_client_info": {
+          "package_name": "com.example.lak.collegedocs2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874657500404-d94krcr7ul53f386d132jadtcv3viinj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lak.collegedocs2",
+            "certificate_hash": "949af333bdc1e4c62f22d72571e6c5b35f173d81"
+          }
+        },
+        {
+          "client_id": "874657500404-igbhjsdtslj2j24ekb4s176va12v0iak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9nsPKj3N5Aa8kWA5q65FwoWMnx4J7pJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874657500404-igbhjsdtslj2j24ekb4s176va12v0iak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
