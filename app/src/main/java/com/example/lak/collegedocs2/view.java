@@ -75,7 +75,8 @@ public class view extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
-        else { //permission is automatically granted on sdk<23 upon installation
+        else { //permission is automatically granted on sdk<23 upon installation'
+            continuefun();
         }
 
 

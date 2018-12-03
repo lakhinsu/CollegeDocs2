@@ -29,85 +29,22 @@ public class MyFiles extends AppCompatActivity {
     String path;
     File directory;
 
-    boolean flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_files);
-        FilesList=findViewById(R.id.myfileslist);
-
-        final ArrayList<String> files=new ArrayList<>();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-                flag=true;
+                filesview();
+
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
         else { //permission is automatically granted on sdk<23 upon installation
-        }
-
-        if(flag==true) {
-            path=Environment.DIRECTORY_DOWNLOADS+"/CollegeDocs";
-
-            directory=new File(Environment.getExternalStoragePublicDirectory("CollegeDocs").getAbsolutePath());
-            File[] filesarry = directory.listFiles();
-
-
-            Log.d("FILESARRAY", "" + directory.getAbsolutePath());
-            Log.d("FILESARRAY", "" + filesarry);
-            Log.d("FILESARRAY",""+directory.isDirectory());
-
-            if(filesarry!=null) {
-
-                for (int i = 0; i < filesarry.length; i++) {
-                    files.add(filesarry[i].getName());
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1, android.R.id.text1, files);
-
-                FilesList.setAdapter(adapter);
-
-                FilesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String name = files.get(i);
-                        File file = new File(Environment.getExternalStoragePublicDirectory("CollegeDocs") + File.separator + name);
-                        Uri uri = Uri.parse(file.getAbsolutePath());
-
-                        try {
-
-                            if (uri.toString().contains(".pdf")) {
-                                // PDF file
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                Intent intent1 = Intent.createChooser(intent, "Open With");
-                                startActivity(intent);
-                            } else if (uri.toString().contains(".doc") || uri.toString().contains(".docx")) {
-                                // Word document
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setDataAndType(Uri.fromFile(file), "application/msword");
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                                Intent intent1 = Intent.createChooser(intent, "Open With");
-                                startActivity(intent);
-
-                            }
-                        }catch (Exception e)
-                        {
-                            Toast.makeText(getApplicationContext(),"Something went Wrong , Try opening it from file manager",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-            }
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Please Grant Permission",Toast.LENGTH_SHORT).show();
+                    filesview();
         }
 
 
@@ -118,11 +55,71 @@ public class MyFiles extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
             //resume tasks needing this permission
-            flag=true;
+            filesview();
         }
         else
         {
             Toast.makeText(getApplicationContext(),"We need this permission !",Toast.LENGTH_SHORT).show();
         }
+    }
+    public void filesview()
+    {
+        FilesList=findViewById(R.id.myfileslist);
+
+        final ArrayList<String> files=new ArrayList<>();
+
+        directory=new File(Environment.getExternalStoragePublicDirectory("CollegeDocs").getAbsolutePath());
+        File[] filesarry = directory.listFiles();
+
+
+        Log.d("FILESARRAY", "" + directory.getAbsolutePath());
+        Log.d("FILESARRAY", "" + filesarry);
+        Log.d("FILESARRAY",""+directory.isDirectory());
+
+        if(filesarry!=null) {
+
+            for (int i = 0; i < filesarry.length; i++) {
+                files.add(filesarry[i].getName());
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, android.R.id.text1, files);
+
+            FilesList.setAdapter(adapter);
+
+            FilesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String name = files.get(i);
+                    File file = new File(Environment.getExternalStoragePublicDirectory("CollegeDocs") + File.separator + name);
+                    Uri uri = Uri.parse(file.getAbsolutePath());
+
+                    try {
+
+                        if (uri.toString().contains(".pdf")) {
+                            // PDF file
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            Intent intent1 = Intent.createChooser(intent, "Open With");
+                            startActivity(intent);
+                        } else if (uri.toString().contains(".doc") || uri.toString().contains(".docx")) {
+                            // Word document
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(Uri.fromFile(file), "application/msword");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            Intent intent1 = Intent.createChooser(intent, "Open With");
+                            startActivity(intent);
+
+                        }
+                    }catch (Exception e)
+                    {
+                        Toast.makeText(getApplicationContext(),"Something went Wrong , Try opening it from file manager",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+
+
     }
 }

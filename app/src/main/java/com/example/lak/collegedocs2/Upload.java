@@ -75,14 +75,54 @@ public class Upload extends AppCompatActivity {
                             R.array.array_1year_sem, android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     semSpinner.setAdapter(adapter);
-
                     semSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             selectedSem=parent.getItemAtPosition(position).toString();
+
+                            if(selectedSem.equals("SEM I"))
+                            {
+                                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Upload.this,
+                                        R.array.sem1_subject, android.R.layout.simple_spinner_item);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                subjectSpinner.setAdapter(adapter);
+                                subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        selectedSubject=parent.getItemAtPosition(position).toString();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
+                            }
+                            else if(selectedSem.equals("SEM II"))
+                            {
+                                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Upload.this,
+                                        R.array.sem2_subject, android.R.layout.simple_spinner_item);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                subjectSpinner.setAdapter(adapter);
+                                subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        selectedSubject=parent.getItemAtPosition(position).toString();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
+                            }
                         }
+
                         @Override
                         public void onNothingSelected(AdapterView<?> parent) {
+
                         }
                     });
                 }
@@ -233,9 +273,19 @@ public class Upload extends AppCompatActivity {
                 filename=selectedSubject+"-"+et1.getText().toString()+":"+fDate;
                 if(pdfUri!=null && filename!=null )
                 {
+                    new android.support.v7.app.AlertDialog.Builder(Upload.this)
+                            .setTitle("Are you sure?")
+                            .setMessage("Your File is : "+filename)
+                            .setIcon(android.R.drawable.ic_menu_upload)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    UploadFile(pdfUri,filename);
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
 
                    // FileUploadInfo f1=new FileUploadInfo(selectedYear,selectedSem,selectedSubject,filename,null);
-                    UploadFile(pdfUri,filename);
+                    //UploadFile(pdfUri,filename);
                 }
                 else{
                     Toast.makeText(Upload.this,"File is not selected",Toast.LENGTH_SHORT).show();
