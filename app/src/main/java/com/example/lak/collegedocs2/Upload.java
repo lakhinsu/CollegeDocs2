@@ -214,6 +214,23 @@ public class Upload extends AppCompatActivity {
                             }
                             else if(selectedSem.equals("SEM VI"))
                             {
+                                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Upload.this,
+                                        R.array.sem6_subject, android.R.layout.simple_spinner_item);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                subjectSpinner.setAdapter(adapter);
+                                subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        selectedSubject=parent.getItemAtPosition(position).toString();
+                                        Log.d("SelectedSubject",""+selectedSubject);
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
 
                             }
                         }
@@ -234,6 +251,47 @@ public class Upload extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             selectedSem=parent.getItemAtPosition(position).toString();
+                            if(selectedSem.equals("SEM V"))
+                            {
+                                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Upload.this,
+                                        R.array.sem7_subject, android.R.layout.simple_spinner_item);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                subjectSpinner.setAdapter(adapter);
+                                subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        selectedSubject=parent.getItemAtPosition(position).toString();
+                                        Log.d("SelectedSubject",""+selectedSubject);
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
+                            }
+                            else if(selectedSem.equals("SEM VI"))
+                            {
+                                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Upload.this,
+                                        R.array.sem8_subject, android.R.layout.simple_spinner_item);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                subjectSpinner.setAdapter(adapter);
+                                subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        selectedSubject=parent.getItemAtPosition(position).toString();
+                                        Log.d("SelectedSubject",""+selectedSubject);
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
+
+                            }
                         }
 
                         @Override
@@ -419,5 +477,13 @@ public class Upload extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

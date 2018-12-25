@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lak.collegedocs2.Settings">
+
+    <EditText
+        android:id="@+id/settingsmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:text=""
+        android:textSize="25sp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_alignLeft="@+id/settingsmail"
+        android:layout_alignStart="@+id/settingsmail"
+        android:layout_below="@+id/settingsmail"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="58dp"
+        android:textSize="25sp"
+        android:text="Send Mail   " />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/savesettings"
+        android:layout_toStartOf="@+id/savesettings"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:text="Download File  "
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/savesettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBox2"
+        android:layout_marginTop="42dp"
+        android:layout_toEndOf="@+id/checkBox"
+        android:background="@drawable/btn_bg_selector"
+        android:layout_toRightOf="@+id/checkBox"
+        android:text="save" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/savesettings"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="61dp"
+        android:textSize="18sp"
+        android:textColor="#ff0303"
+        android:text="*There will be a delay of ~60 secs in receiving the mail and we are sorry for that because we are using spark plan of firebase. " />
+</RelativeLayout>

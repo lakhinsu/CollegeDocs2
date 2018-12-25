@@ -28,7 +28,8 @@
         <activity android:name=".Upload" />
         <activity android:name=".view" />
         <activity android:name=".MyFiles" />
-        <activity android:name=".About"></activity>
+        <activity android:name=".About" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

@@ -15,8 +15,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -35,6 +37,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -42,12 +46,17 @@ import java.util.ArrayList;
 import android.Manifest.permission.*;
 import android.widget.Toast;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
+import static android.support.v4.content.ContextCompat.startActivities;
 import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ItemAdapter extends ArrayAdapter<FileUploadInfo>
 {
+    SharedPreferences sharedPreferences;
     boolean flag=false;
+    long refid;
     public ItemAdapter(Context context, ArrayList<FileUploadInfo> arrayList)
     {
         super(context,0,arrayList);
@@ -72,12 +81,15 @@ public class ItemAdapter extends ArrayAdapter<FileUploadInfo>
                 i1.setData(Uri.parse(url));
                 startActivity(getContext().getApplicationContext(),i1,null);*/
 
+                sharedPreferences=getContext().getSharedPreferences("UserPrefs",Context.MODE_PRIVATE);
 
 
 
                 DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
 
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+
+
                 request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
                 request.setAllowedOverRoaming(false);
                 request.setTitle("Downloading " + n1.getType());
@@ -97,12 +109,39 @@ public class ItemAdapter extends ArrayAdapter<FileUploadInfo>
                // request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,  "CollegeDocs" +n1.getSubject()+ n1.getType()+"."+ext);
                 //request.setDestinationInExternalFilesDir(getContext(),"CollegeDocs","" +n1.getSubject()+ n1.getType()+"."+ext);
                 String name=n1.getType().substring(0,n1.getType().lastIndexOf(":")-1);
+
+                if(sharedPreferences.getString("SMAIL","").equals("true")) {
+
+                    if(sharedPreferences.getString("EMAIL","").length()!=0) {
+                        String upath = url.substring(url.indexOf("%"), url.indexOf("?"));
+                        String token = url.substring(url.lastIndexOf("&"));
+                        String newurl = upath;
+
+                        String funtrigger = "https://us-central1-collegedocs2.cloudfunctions.net/filemailer/" + "?mail="+sharedPreferences.getString("EMAIL","") + "&filename=" + name + "." + ext + "&pathh=" + newurl + "&altt=media" + "&tokenn=" + token;
+
+                        Toast.makeText(getContext(),"Sending Mail",Toast.LENGTH_SHORT).show();
+                        new RequestTask().execute(funtrigger);
+                    }
+                    else
+                        Toast.makeText(getContext(),"Set Email Address",Toast.LENGTH_SHORT).show();
+                }
+
+
                 request.setDestinationInExternalPublicDir("CollegeDocs","" + name+"."+ext);
 
                 Log.d("SelectedSubject",n1.getSubject());
                 Log.d("FILESARRAY",""+getContext().getFilesDir().getAbsolutePath()+"/CollegeDocs");
 
-                final long refid = downloadManager.enqueue(request);
+                if(sharedPreferences.getString("DOWN","").equals("true")) {
+
+                    refid = downloadManager.enqueue(request);
+                }
+                else
+                {
+                    if(sharedPreferences.getString("DOWN","").equals("false") && sharedPreferences.getString("SMAIL","").equals("false")){
+                        Toast.makeText(getContext(),"Please Select File Receiving Preferences In Settings",Toast.LENGTH_SHORT).show();
+                    }
+                }
 
 
                 BroadcastReceiver onComplete = new BroadcastReceiver() {
@@ -150,4 +189,31 @@ public class ItemAdapter extends ArrayAdapter<FileUploadInfo>
     }
 
 
+}
+class RequestTask extends AsyncTask<String, String, String> {
+
+    @Override
+    protected String doInBackground(String... uri) {
+        String responseString = null;
+        try {
+            URL url = new URL(uri[0]);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            if(conn.getResponseCode() == HttpsURLConnection.HTTP_OK){
+                // Do normal input or output stream reading
+            }
+            else {
+                responseString = "FAILED"; // See documentation for more info on response handling
+            }
+        }
+         catch (Exception e) {
+            //TODO Handle problems..
+        }
+        return responseString;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        //Do anything with response..
+    }
 }

@@ -2,6 +2,7 @@ package com.example.lak.collegedocs2;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -60,12 +61,22 @@ public class MainActivity extends AppCompatActivity
 
     String selectedYear,selectedSem,selectedSubject;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        sharedPreferences=getSharedPreferences("UserPrefs",Context.MODE_PRIVATE);
+        if(!sharedPreferences.contains("EMAIL")){
+            Intent intent=new Intent(getApplicationContext(),Settings.class);
+            startActivity(intent);
+            finish();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,6 +86,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         Spinner yearSpinner = (Spinner) findViewById(R.id.view_xml_selectyear);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -356,7 +369,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item= menu.findItem(R.id.action_settings);
-        item.setVisible(false);
+        item.setVisible(true);
         super.onPrepareOptionsMenu(menu);
         return true;
     }
@@ -377,6 +390,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent=new Intent(getApplicationContext(),Settings.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
@@ -392,6 +408,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.uploaddocs) {
             Intent intent=new Intent(getApplicationContext(),Upload.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.downloaded) {
             Intent intent=new Intent(getApplicationContext(),MyFiles.class);
             startActivity(intent);
